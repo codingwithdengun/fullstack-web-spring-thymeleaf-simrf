@@ -20,7 +20,7 @@ public class AssetsController {
 
     // METHOD  UNTUK GET INDEX DATA ASSETS DARI DATABASE
     @GetMapping(value = "/index")
-    public String getIndex(ModelMap map, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String getIndex(ModelMap map, RedirectAttributes redirectAttributes, BindingResult result) {
         // berikan kondisi saat error
         if(result.hasErrors()){
             log.error("Ada Kesalahan, Silahkan Check Kembali, berikut detailnya : " + result);

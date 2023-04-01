@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping(value = "/vendor")
+@RequestMapping(value = "/vendors")
 @Slf4j
 public class VendorsController {
     @Autowired
@@ -19,14 +19,10 @@ public class VendorsController {
 
     // GET INDEX (GET TABLE VENDOR)
     @GetMapping(value = "/index")
-    public String getListVendor(ModelMap map, BindingResult result, RedirectAttributes redirectAttributes){
-        // berikan kondisi ketika error
-        if(result.hasErrors()){
-            log.error("Ada Kesalahan Saat Get Data Vendor, Silahkan Check Kembali, berikut detail erronya : " + result);
-        }
+    public String getListVendor(ModelMap map, RedirectAttributes redirectAttributes){
         map.addAttribute("vendors", vendorsUsecase.getListVendors());
         redirectAttributes.addFlashAttribute("alertSuccess", "Get Data Berhasil");
-        return "pages/vendor/index";
+        return "pages/vendors/index";
     }
 
     // GET FORM
@@ -37,7 +33,7 @@ public class VendorsController {
         }
         map.addAttribute("formVendors", vendorsUsecase.getListVendors());
         redirectAttributes.addFlashAttribute("alertSuccess", "Get Data With Form Berhasil");
-        return "pages/vendor/form";
+        return "pages/vendors/form";
     }
 
     // GET FORM UNTUK EDIT DATA
@@ -46,11 +42,11 @@ public class VendorsController {
                               RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
             log.error("Ada Kesalahan Saat Get Form Edit, Silahkan Check Kembali, berikut detail erronya : " + result);
-            return "pages/vendor/index";
+            return "pages/vendors/index";
         }
         map.addAttribute("getEditVendors", vendorsUsecase.findByIdVendors(id));
         redirectAttributes.addFlashAttribute("alertSuccess", "Get Edit Form Berhasil");
-        return "pages/vendor/edit";
+        return "pages/vendors/edit";
     }
 
     // update data
@@ -63,7 +59,7 @@ public class VendorsController {
         map.addAttribute("vendors", vendors);
         vendorsUsecase.saveVendors(vendors);
         redirectAttributes.addFlashAttribute("alertSuccess", "Berhasil Melakukan Update Data");
-        return "redirect:/vendor/index";
+        return "redirect:/vendors/index";
     }
 
     // SAVE DATA
@@ -76,7 +72,7 @@ public class VendorsController {
         }
         vendorsUsecase.saveVendors(vendors);
         redirectAttributes.addFlashAttribute("alertSuccess", "Berhasil Melakukan Proses Simpan Data");
-        return "redirect:/vendor/index";
+        return "redirect:/vendors/index";
     }
 
     // delete data
@@ -87,6 +83,6 @@ public class VendorsController {
         }
         vendorsUsecase.deleteVendorsById(id);
         redirectAttributes.addFlashAttribute("alertSuccess", "Berhasil Melakukan Proses Delete Data");
-        return "redirect:/vendor/index";
+        return "redirect:/vendors/index";
     }
 }

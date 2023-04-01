@@ -8,11 +8,16 @@ public class ApplicationController {
 
     @GetMapping(value = "/login")
     public String getLogin(){
-        return "login";
+        return "security/login";
     }
 
-    @GetMapping(value = "/dashboard")
-    public String getDashboard(){return "index";}
+    @GetMapping(value = "/ims/dashboard")
+    public String getDashboard(){return "dashboard/index";}
 
+    @GetMapping(value = "/ims/daftar")
+    public String getRegister(){ return "security/register";}
+
+    @GetMapping(value = "/ims/lupa-password")
+    public String getForgotPassword(){return "security/forgot_password";}
 }
 
